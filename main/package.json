@@ -1,13 +1,29 @@
 {
-    "name"          : "angular-2",
-    "version"       : "1.0.0",
-    "scripts"       : {
-        "start"         : "concurrent \"npm run tsc:w\" \"npm run http-server\" ",
-        "tsc"           : "tsc",
-        "tsc:w"         : "tsc -w",
-        "http-server"   : "http-server",
-        "typings"       : "typings",
-        "postinstall"   : "typings install"
+    "name": "angular2-main",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "concurrent \"npm run tsc:w\" \"npm run http-server\" ",
+        "tsc": "tsc",
+        "tsc:w": "tsc -w",
+        "http-server": "http-server",
+        "typings": "typings",
+        "postinstall": "typings install"
     },
-    "license"       : "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "concurrently": "^3.5.1",
+        "typescript": "^2.6.2",
+        "typings": "^2.1.1"
+    },
+    "dependencies": {
+        "angular-2": "^1.0.0",
+        "bootstrap": "^3.3.7",
+        "es6-promise": "^4.2.2",
+        "es6-shim": "^0.35.3",
+        "reflect-metadata": "^0.1.12",
+        "rxjs": "^5.5.6",
+        "systemjs": "^0.20.19",
+        "zone.js": "^0.8.20"
+    },
+    "author": "Bart Bastings"
 }
