@@ -24,6 +24,11 @@ System.register(["angular2/core", "./model/city.model"], function (exports_1, co
             AppComponent = /** @class */ (function () {
                 function AppComponent() {
                     this.title = 'Kantoren Sogeti';
+                    this.toggleMsg = 'Vergreg lijst met kantoren';
+                    this.cityPhoto = '';
+                    this.newCity = '';
+                    this.showCities = true;
+                    this.textHidden = true;
                     this.cities = [
                         new city_model_1.City(1, 'Vianen', 'Utrecht'),
                         new city_model_1.City(2, 'Amersfoort', 'Utrecht'),
@@ -33,7 +38,36 @@ System.register(["angular2/core", "./model/city.model"], function (exports_1, co
                     ];
                 }
                 AppComponent.prototype.btnClick = function () {
-                    alert('Test alert');
+                    var msg;
+                    this.showCities ? msg = 'Kantoren zijn zichtbaar!' : msg = 'Kantoren zijn verborgen.';
+                    alert(msg);
+                };
+                AppComponent.prototype.toggleHidden = function () {
+                    this.textHidden = !this.textHidden;
+                };
+                AppComponent.prototype.toggleCities = function () {
+                    this.showCities = !this.showCities;
+                    this.showCities
+                        ? this.toggleMsg = 'Verberg lijst met steden'
+                        : this.toggleMsg = 'Toon de lijst met steden';
+                };
+                AppComponent.prototype.showCity = function (city) {
+                    if (this.currentCity !== city) {
+                        var imgUrl = '';
+                        this.currentCity = city;
+                        if (this.currentCity.province !== 'onbekend') {
+                            console.log(this.currentCity.name);
+                            imgUrl = "img/" + this.currentCity.name + ".jpg";
+                        }
+                        this.cityPhoto = imgUrl;
+                    }
+                };
+                AppComponent.prototype.changeCity = function (value) {
+                    this.newCity = value;
+                };
+                AppComponent.prototype.addCity = function (value) {
+                    var newCity = new city_model_1.City(this.cities.length + 1, value, 'onbekend');
+                    this.cities.push(newCity);
                 };
                 AppComponent = __decorate([
                     core_1.Component({

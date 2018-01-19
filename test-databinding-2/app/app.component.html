@@ -1,0 +1,32 @@
+<h1>{{ title }}</h1>
+<label for="checkbox">
+    <input id="checkbox" type="checkbox" (change)="toggleCities()"> {{ toggleMsg }}
+</label>
+<ul class="list-group" *ngIf="showCities">
+    <li class="list-group-item" *ngFor="let city of cities" (click)="showCity(city)">
+        <strong>City:</strong> {{ city.name }}
+        <br/>
+        <strong>Province:</strong> {{ city.province }}</li>
+</ul>
+<div *ngIf="currentCity">
+    <img [src]="cityPhoto" [alt]="currentCity.name" class="img-responsive">
+    <h3>Gekozen kantoor: {{currentCity.name}}</h3>
+</div>
+<h2 *ngIf="cities.length > 3 && showCities">Sogeti heeft veel kantoren!</h2>
+<hr />
+<button type="button" (click)="btnClick()" class="btn btn-primary">Controleer</button>
+<hr />
+<button type="button" (click)="toggleHidden()" class="btn btn-primary">Toggle tekst</button>
+<h3 [hidden]="textHidden">De tekst is zichtbaar of onzichtbaar</h3>
+<hr />
+<div>
+    <input type="text" class="input-lg" placeholder="Nieuw kantoor..." #txtCity (keyup)="changeCity(txtCity.value)" (keyup.enter)="addCity(txtCity.value)">
+    <br/>
+    <button type="button" (click)="addCity(txtCity.value)" class="btn btn-succes">Toevoegen kantoor</button>
+    <br/>
+    <h2>{{ newCity }}</h2>
+</div>
+<!-- ngModel -->
+<input type="text" [(ngModel)]="txtNewCity" placeholder="nieuwe stad">
+<br>
+<h4>{{ txtNewCity }}</h4>

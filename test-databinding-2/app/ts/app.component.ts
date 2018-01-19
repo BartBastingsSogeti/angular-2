@@ -10,9 +10,20 @@ import { City } from './model/city.model';
 export class AppComponent {
     title:string;
     cities:City[];
+    textHidden:boolean;
+    toggleMsg:string;
+    showCities:boolean;
+    newCity:string;
+    currentCity:City;
+    cityPhoto:string;
 
     constructor() {
         this.title = 'Kantoren Sogeti';
+        this.toggleMsg = 'Vergreg lijst met kantoren';
+        this.cityPhoto = '';
+        this.newCity = '';
+        this.showCities = true;
+        this.textHidden = true;
         this.cities = [
             new City(1, 'Vianen', 'Utrecht'),
             new City(2, 'Amersfoort', 'Utrecht'),
@@ -22,7 +33,46 @@ export class AppComponent {
         ];
     }
 
-    btnClick(){
-        alert('Test alert');
+    btnClick() {
+        let msg;
+        this.showCities ? msg = 'Kantoren zijn zichtbaar!' : msg = 'Kantoren zijn verborgen.' ;
+        alert(msg);
+    }
+
+    toggleHidden() {
+        this.textHidden = !this.textHidden;
+    }
+
+    toggleCities() {
+        this.showCities = !this.showCities;
+        this.showCities
+            ? this.toggleMsg = 'Verberg lijst met steden'
+            : this.toggleMsg = 'Toon de lijst met steden';
+    }
+
+    showCity(city:City) {
+        if ( this.currentCity !== city) {
+            let imgUrl = '';
+
+            this.currentCity = city;
+            if (this.currentCity.province !== 'onbekend') {
+                console.log(this.currentCity.name);
+                imgUrl = `img/${this.currentCity.name}.jpg`;
+            }
+            this.cityPhoto = imgUrl;
+        }
+    }
+
+    changeCity(value:string) {
+        this.newCity = value;
+    }
+    
+    addCity(value:string) {
+        let newCity = new City(
+            this.cities.length + 1,
+            value,
+            'onbekend');
+
+        this.cities.push(newCity);
     }
 }
