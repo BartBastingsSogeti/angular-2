@@ -4,7 +4,7 @@ import { City } from './model/city.model';
 
 @Component({
     selector : 'main-app',
-    templateUrl : 'app/template/app.component.html'
+    templateUrl : 'app/app.component.html'
 })
 
 export class AppComponent {

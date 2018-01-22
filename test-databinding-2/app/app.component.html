@@ -6,7 +6,8 @@
     <li class="list-group-item" *ngFor="let city of cities" (click)="showCity(city)">
         <strong>City:</strong> {{ city.name }}
         <br/>
-        <strong>Province:</strong> {{ city.province }}</li>
+        <strong>Province:</strong> {{ city.province }}
+    </li>
 </ul>
 <div *ngIf="currentCity">
     <img [src]="cityPhoto" [alt]="currentCity.name" class="img-responsive">

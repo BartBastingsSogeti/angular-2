@@ -2,7 +2,13 @@ import { Component } from 'angular2/core';
 
 @Component({
     selector: 'main-app',
-    template: '<h1>Hello World!</h1>'
+    templateUrl : 'app/app.component.html'
 })
 
-export class AppComponent {}
+export class AppComponent {
+    title:string;
+
+    constructor() {
+        this.title = 'Template angular 2';
+    }
+}
