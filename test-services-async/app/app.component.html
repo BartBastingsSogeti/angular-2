@@ -1,0 +1,21 @@
+<h1>{{ title }}</h1>
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let city of cities">
+        <strong>City:</strong> {{ city.name }}
+        <br/>
+        <strong>Province:</strong> {{ city.province }}
+        <br>
+        <button type="button" class="btn btn-info" (click)="showCity(city)">Kantoor bekijken</button>
+        <button type="button" class="btn btn-warning" (click)="deleteCity(city.id)">Kantoor verwijderen</button>
+    </li>
+</ul>
+<div *ngIf="showCityVisible" (click)="hideCityPhoto()">
+    <hr>
+    <img [src]="cityPhoto" [alt]="currentCity.name" class="img-responsive">
+</div>
+<hr>
+<input #newCity type="text" class="input-lg" placeholder="Nieuwe kantoor...">
+<button type="button" class="btn btn-primary" (click)="addCity(newCity.value)">Stad toevoegen</button>
+<hr>
+<input #searchCity type="number" class="input-lg" placeholder="Zoek kantoor op id">
+<button type="button" class="btn btn-secondary" (click)="getCity(searchCity.value)">Zoeken</button>
