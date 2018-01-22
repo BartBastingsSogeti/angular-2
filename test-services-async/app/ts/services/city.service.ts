@@ -1,17 +1,13 @@
 // city.service.ts
 import { Injectable } from 'angular2/core';
 import { City } from '../model/city.model';
+import { Http } from 'angular2/http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class CityService {
 
-    private cities:City[] = [
-        new City(1, 'Vianen', 'Utrecht'),
-        new City(2, 'Amersfoort', 'Utrecht'),
-        new City(3, 'Amsterdam', 'Noord-holland'),
-        new City(4, 'Eindhoven', 'Noord-brabant'),
-        new City(5, 'Groningen', 'Groningen')
-    ];
+    constructor(private http:Http) { }
 
     /**
      * getCities
@@ -19,8 +15,9 @@ export class CityService {
      * 
      * @returns {array}
      */
-    getCities():City[] {
-        return this.cities;
+    getCities() {
+        return this.http.get('app/cities.json')
+            .map(res => <City[]> res.json());
     }
 
     /**

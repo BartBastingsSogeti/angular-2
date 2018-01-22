@@ -1,0 +1,27 @@
+[
+  {
+	"id"      : 1,
+	"name"    : "Vianen",
+	"province": "Utrecht"
+  },
+  {
+	"id"      : 2,
+	"name"    : "Amersfoort",
+	"province": "Utrecht"
+  },
+  {
+	"id"      : 3,
+	"name"    : "Amsterdam",
+	"province": "Noord-holland"
+  },
+  {
+	"id"      : 4,
+	"name"    : "Eindhoven",
+	"province": "Noord-brabant"
+  },
+  {
+	"id"      : 5,
+	"name"    : "Groningen",
+	"province": "Groningen"
+  }
+]

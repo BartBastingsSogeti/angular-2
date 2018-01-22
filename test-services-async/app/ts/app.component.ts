@@ -1,66 +1,69 @@
 // app.component.ts
 import { Component } from 'angular2/core';
 import { City } from './model/city.model';
+import { Person } from './model/person.model';
 import { CityService } from './services/city.service';
+import { PersonService } from './services/person.service';
+import { HTTP_PROVIDERS } from 'angular2/http';
 
 @Component({
     selector: 'main-app',
-    templateUrl : 'app/app.component.html'
+    templateUrl : 'app/app.component.html',
+    providers: [CityService, PersonService, HTTP_PROVIDERS]
 })
 
 export class AppComponent {
     title:string;
-    city:City;
     cities:City[];
-    cityPhoto:string;
-    currentCity:City;
-    showCityVisible:boolean;
+    persons:Person[];
+    numRows:number[];
+    selectedRows:number;
 
-    constructor(private cityService:CityService) {
+    constructor(private cityService:CityService, private personService:PersonService) {
         this.title = 'Test Services';
-        this.cityPhoto ='';
-        this.showCityVisible = false;
+        this.cities = [];
+        this.persons = [];
+        this.numRows = [5, 10, 15, 20];
+        this.selectedRows = 5;
     }
 
     ngOnInit(){
-		this.getCities();
+        this.getCities();
+        this.getPersons();
     }
     
     getCities() {
-        this.cities = this.cityService.getCities();
+        this.cityService.getCities()
+            .subscribe(
+                cityData => this.cities = cityData, // succes function(citydata)
+                err => console.error(err), // erro function(err)
+                () => console.log('Kantoren ophalen compleet.') // complete function
+            )
     }
 
-    getCity(cityId:number) {
-        this.city = this.cityService.getCity(Number(cityId));
-        console.log(this.city);
+    getPersons() {
+        this.personService.getPersons()
+            .subscribe(
+                personsData => this.persons = this.persons.concat(personsData),
+                err => console.error(err),
+                () => console.log('Personen ophalen compleet.')
+            )
     }
 
-    showCity(city:City) {
-        if (this.currentCity !== city) {
-            let imgUrl = '',
-                visible = false;
-
-            this.currentCity = city;
-            if (this.currentCity.province !== 'onbekend') {
-                imgUrl = `img/${this.currentCity.name}.jpg`;
-                visible = true;
-            }
-            this.showCityVisible = visible;
-            this.cityPhoto = imgUrl;
-        }
-    }
-    
-    hideCityPhoto() {
-        if (this.showCityVisible) {
-            this.showCityVisible = false;
-        }
+    getPersonByNumRow() {
+        this.personService.getPersonByNumRow(this.selectedRows)
+            .subscribe(
+                personData => this.persons = personData,
+                err => console.error(err),
+                () => console.log('Personen ophalen via select compleet.')
+            )
     }
 
-    addCity(cityName:string) {
-        this.cityService.addCity(cityName);
+    emptyTable() {
+        this.persons = [];
     }
 
-    deleteCity(cityId:number) {
-        this.cityService.deleteCity(cityId);
+    insertPersons() {
+        this.getPersons();
     }
 }
